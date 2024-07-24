@@ -141,3 +141,24 @@ internal fun checkRemoveScenario(c1: CharArray, index1: Int, c2: CharArray, inde
     }
 }
 
+fun arrays_1_6_string_Compression(input: String): String {
+    val sb = StringBuilder()
+
+    var prev: Char = input[0]
+    var count = 1
+    for (i in 1..<input.length) {
+        val curr = input[i]
+        if (curr.uppercaseChar() == prev.uppercaseChar()) {
+            count++
+        } else {
+            sb.append(prev).append(count)
+            count = 1
+            prev = curr
+        }
+    }
+    sb.append(prev).append(count)
+
+    val compressed = sb.toString()
+    return if (compressed.length >= input.length) input else compressed
+}
+

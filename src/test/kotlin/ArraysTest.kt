@@ -1,4 +1,5 @@
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -23,5 +24,17 @@ class ArraysTest {
 
         assertFalse { arrays_1_5_oneAway("arcade", "arcoded") }
         assertFalse { arrays_1_5_oneAway("pale", "bake") }
+    }
+
+
+    @Test
+    fun testStringCompression() {
+        assertEquals("a3", arrays_1_6_string_Compression("aaa"))
+        assertEquals("abc", arrays_1_6_string_Compression("abc"))
+        assertEquals("a2b3c4d1", arrays_1_6_string_Compression("aabbbccccd"))
+        assertEquals("a3", arrays_1_6_string_Compression("aaa"))
+        assertEquals("aabb", arrays_1_6_string_Compression("aabb"))
+        assertEquals("aabcc", arrays_1_6_string_Compression("aabcc"))
+        assertEquals("a2b2c6", arrays_1_6_string_Compression("aabbcccccc"))
     }
 }
