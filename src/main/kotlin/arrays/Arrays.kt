@@ -1,3 +1,5 @@
+import kotlin.math.abs
+
 fun main(args: Array<String>) {
     println("Cracking the coding interview")
     println("Chapter 1: Arrays and Strings")
@@ -89,3 +91,53 @@ fun arrays_1_4_palindromic_permutation(s: String): Boolean {
     }
     return count < 2
 }
+
+fun arrays_1_5_oneAway(s1: String, s2: String): Boolean {
+    val diffLength = s1.length - s2.length
+
+    if (abs(diffLength) > 1) return false
+
+    val charArray1 = if (diffLength >= 0) s1.toCharArray() else s2.toCharArray()
+    val charArray2 = if (diffLength >= 0) s2.toCharArray() else s1.toCharArray()
+
+    return if (diffLength == 0) {
+        checkEqualsOrReplaceScenario(charArray1, 0, charArray2, 0)
+    } else {
+        checkRemoveScenario(charArray1, 0, charArray2, 0)
+    }
+}
+
+internal fun checkEqualsOrReplaceScenario(
+    c1: CharArray, index1: Int, c2: CharArray, index2: Int
+): Boolean {
+    assert(index1 > -1)
+    assert(index1 > -1)
+    if (index1 >= c1.size) return true
+    val newIndex1 = index1 + 1
+    val newIndex2 = index2 + 1
+    return if (c1[index1] == c2[index2]) {
+        checkEqualsOrReplaceScenario(c1, newIndex1, c2, newIndex2)
+    } else {
+        checkEqualsScenario(c1, newIndex1, c2, newIndex2)
+    }
+}
+
+internal fun checkEqualsScenario(
+    c1: CharArray, index1: Int, c2: CharArray, index2: Int
+): Boolean {
+    if (index1 >= c1.size) return true
+    val newIndex1 = index1 + 1
+    val newIndex2 = index2 + 1
+    return if (c1[index1] == c2[index2]) checkEqualsScenario(c1, newIndex1, c2, newIndex2)
+    else false
+}
+
+internal fun checkRemoveScenario(c1: CharArray, index1: Int, c2: CharArray, index2: Int): Boolean {
+    if (index1 >= c1.size || index2 >= c2.size) return true
+    return if (c1[index1] != c2[index2]) {
+        checkEqualsScenario(c1, index1 + 1, c2, index2)
+    } else {
+        checkRemoveScenario(c1, index1 + 1, c2, index2 + 1)
+    }
+}
+
