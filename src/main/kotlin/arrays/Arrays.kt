@@ -162,3 +162,58 @@ fun arrays_1_6_string_Compression(input: String): String {
     return if (compressed.length >= input.length) input else compressed
 }
 
+fun arrays_1_7_rotate_matrix(matrix: Array<IntArray>): Array<IntArray> {
+    val row = matrix.size
+    val col = matrix[0].size
+    val rotatedMatrix = Array(row) { IntArray(col) }
+
+    for (j in 0..<col) {
+        for (i in 0..<row) {
+            rotatedMatrix[j][row - 1 - i] = matrix[i][j]
+        }
+    }
+    return rotatedMatrix
+}
+
+fun arrays_1_7_rotate_matrix_in_place(matrix: Array<IntArray>) {
+    if (matrix.size < 2 || matrix[0].size < 2) {
+        return
+    }
+    val size = matrix.size
+    for (i in 0 until size / 2) {
+        for (j in i until size - i - 1) {
+            val t = matrix[i][j]
+            matrix[i][j] = matrix[size - 1 - j][i]
+            matrix[size - 1 - j][i] = matrix[size - 1 - i][size - 1 - j]
+            matrix[size - 1 - i][size - 1 - j] = matrix[j][size - 1 - i]
+            matrix[j][size - 1 - i] = t
+        }
+    }
+}
+
+internal fun arrays_1_8_zero_matrix(matrix: Array<IntArray>) {
+    if (matrix.isEmpty()) return
+    val rowZeros = BooleanArray(matrix.size)
+    val colZeros = BooleanArray(matrix[0].size)
+
+    matrix.forEachIndexed { rowIndex, row ->
+        row.forEachIndexed { colIndex, item ->
+            if (item == 0) {
+                rowZeros[rowIndex] = true
+                colZeros[colIndex] = true
+            }
+        }
+    }
+    matrix.forEachIndexed { rowIndex, row ->
+        row.forEachIndexed { colIndex, _ ->
+            if (rowZeros[rowIndex] || colZeros[colIndex]) {
+                matrix[rowIndex][colIndex] = 0
+            }
+        }
+    }
+}
+
+fun arrays_1_9_string_rotation() {
+    
+}
+

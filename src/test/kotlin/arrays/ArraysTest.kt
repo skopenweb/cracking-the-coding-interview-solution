@@ -1,3 +1,11 @@
+package arrays
+
+import arrays_1_1_isUnique
+import arrays_1_5_oneAway
+import arrays_1_6_string_Compression
+import arrays_1_7_rotate_matrix
+import arrays_1_7_rotate_matrix_in_place
+import print
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -36,5 +44,43 @@ class ArraysTest {
         assertEquals("aabb", arrays_1_6_string_Compression("aabb"))
         assertEquals("aabcc", arrays_1_6_string_Compression("aabcc"))
         assertEquals("a2b2c6", arrays_1_6_string_Compression("aabbcccccc"))
+    }
+
+    @Test
+    fun testRotatedMatrix() {
+        val input = Array(3) { i ->
+            IntArray(3) { j -> (i) * 3 + j + 1 }
+        }
+        input.print()
+        val expectedArray = arrayOf(
+            intArrayOf(7, 4, 1),
+            intArrayOf(8, 5, 2),
+            intArrayOf(9, 6, 3),
+        )
+        val output = arrays_1_7_rotate_matrix(input)
+        output.forEachIndexed { i, row ->
+            row.forEachIndexed { j, item ->
+                assertEquals(expectedArray[i][j], item)
+            }
+        }
+    }
+
+    @Test
+    fun testRotatedMatrixInplace() {
+        val input = Array(3) { i ->
+            IntArray(3) { j -> (i) * 3 + j + 1 }
+        }
+        val expectedArray = arrayOf(
+            intArrayOf(7, 4, 1),
+            intArrayOf(8, 5, 2),
+            intArrayOf(9, 6, 3),
+        )
+        arrays_1_7_rotate_matrix_in_place(input)
+        input.print()
+        input.forEachIndexed { i, row ->
+            row.forEachIndexed { j, item ->
+                assertEquals(expectedArray[i][j], item)
+            }
+        }
     }
 }
