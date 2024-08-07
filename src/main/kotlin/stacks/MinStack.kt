@@ -1,4 +1,4 @@
-package stack_queue
+package stacks
 
 interface IMinStack {
     val min: Int

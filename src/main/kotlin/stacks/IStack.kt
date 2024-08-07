@@ -1,4 +1,4 @@
-package stack_queue
+package stacks
 
 interface IStack<T> {
     val isEmpty: Boolean

@@ -1,6 +1,4 @@
-package stack_queue
-
-import stack_queue.Stack.Companion.MAXSIZE
+package stacks
 
 interface IThreeStacks {
     fun push(item: Int, into: Int)

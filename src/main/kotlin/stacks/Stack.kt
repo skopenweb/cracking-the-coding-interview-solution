@@ -1,4 +1,4 @@
-package stack_queue
+package stacks
 
 fun main() {
     val s = Stack<Int>()
