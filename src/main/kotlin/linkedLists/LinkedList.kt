@@ -1,6 +1,6 @@
 package linkedLists
 
-class Node(var value: Int = -1, var next: Node? = null) {
+internal class Node(var value: Int = -1, var next: Node? = null) {
     override fun toString(): String {
         return String.format("{$value, ${next.hashCode()} ")
     }
@@ -11,7 +11,7 @@ class Node(var value: Int = -1, var next: Node? = null) {
     }
 }
 
-class LinkedList(var head: Node? = null) : IList {
+internal class LinkedList(var head: Node? = null) : IList {
     override fun isEmpty() = head == null
 
     override val size: Int
@@ -61,7 +61,7 @@ class LinkedList(var head: Node? = null) : IList {
     }
 }
 
-fun LinkedList.print() {
+internal fun LinkedList.print() {
     var curr = head
     while (curr != null) {
         print("${curr.value}->")
@@ -70,7 +70,7 @@ fun LinkedList.print() {
     println(null)
 }
 
-fun linked_list_2_1_remove_dups(l: LinkedList) {
+internal fun linked_list_2_1_remove_dups(l: LinkedList) {
     if (l.isEmpty()) {
         return
     }
@@ -89,7 +89,7 @@ fun linked_list_2_1_remove_dups(l: LinkedList) {
     }
 }
 
-fun linked_list_2_2_kth_to_last(l: LinkedList, k: Int): Node? {
+internal fun linked_list_2_2_kth_to_last(l: LinkedList, k: Int): Node? {
     if (l.isEmpty()) return null
 
     var curr = l.head
@@ -105,7 +105,7 @@ fun linked_list_2_2_kth_to_last(l: LinkedList, k: Int): Node? {
     return curr
 }
 
-fun linked_list_2_2_kth_to_last_2(l: LinkedList, k: Int): Node? {
+internal fun linked_list_2_2_kth_to_last_2(l: LinkedList, k: Int): Node? {
     var kthNode = l.head
     var end = kthNode
 
@@ -122,7 +122,7 @@ fun linked_list_2_2_kth_to_last_2(l: LinkedList, k: Int): Node? {
     return kthNode
 }
 
-fun linked_list_2_2_kth_to_last_recursive(l: LinkedList, k: Int): Node? {
+internal fun linked_list_2_2_kth_to_last_recursive(l: LinkedList, k: Int): Node? {
     if (l.isEmpty()) return null
 
     val kthPair = findElem(l.head, k)
@@ -139,7 +139,7 @@ internal fun findElem(node: Node?, k: Int): Pair<Int, Node?> {
     }
 }
 
-fun linked_list_2_3_delete_middle_node(l: LinkedList) {
+internal fun linked_list_2_3_delete_middle_node(l: LinkedList) {
     if (l.isEmpty()) return
     deleteMid(l.head, 1)
 }
@@ -153,7 +153,7 @@ internal fun deleteMid(n: Node?, count: Int): Int {
     return size
 }
 
-fun linked_list_2_4_partition(l: LinkedList, x: Int) {
+internal fun linked_list_2_4_partition(l: LinkedList, x: Int) {
     if (l.isEmpty()) return
     var curr = l.head
     while (curr != null && curr.value < x) {
@@ -171,7 +171,7 @@ fun linked_list_2_4_partition(l: LinkedList, x: Int) {
     } while (true)
 }
 
-fun linked_list_2_5_sum_list(l1: LinkedList, l2: LinkedList): LinkedList {
+internal fun linked_list_2_5_sum_list(l1: LinkedList, l2: LinkedList): LinkedList {
     if (l1.isEmpty()) return l2
     if (l2.isEmpty()) return l1
 
@@ -206,7 +206,7 @@ fun linked_list_2_5_sum_list(l1: LinkedList, l2: LinkedList): LinkedList {
     return l1
 }
 
-fun linked_list_2_6_palindrome(l: LinkedList): Boolean {
+internal fun linked_list_2_6_palindrome(l: LinkedList): Boolean {
     if (l.isEmpty()) return false
     var revNode: Node? = null
     var currNode = l.head
@@ -230,7 +230,7 @@ fun linked_list_2_6_palindrome(l: LinkedList): Boolean {
     return i == count / 2
 }
 
-fun linked_list_2_7_intersection(l1: LinkedList, l2: LinkedList): Node? {
+internal fun linked_list_2_7_intersection(l1: LinkedList, l2: LinkedList): Node? {
     val s1 = mutableSetOf<Node>()
     val s2 = mutableSetOf<Node>()
 
@@ -249,7 +249,7 @@ fun linked_list_2_7_intersection(l1: LinkedList, l2: LinkedList): Node? {
     return null
 }
 
-fun linked_list_2_8_loop(l: LinkedList): Node? {
+internal fun linked_list_2_8_loop(l: LinkedList): Node? {
     if (l.isEmpty()) return null
     var slow = l.head
     var fast = l.head

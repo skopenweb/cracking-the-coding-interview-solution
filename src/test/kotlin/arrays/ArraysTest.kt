@@ -34,7 +34,6 @@ class ArraysTest {
         assertFalse { arrays_1_5_oneAway("pale", "bake") }
     }
 
-
     @Test
     fun testStringCompression() {
         assertEquals("a3", arrays_1_6_string_Compression("aaa"))

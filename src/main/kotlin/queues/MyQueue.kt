@@ -2,14 +2,14 @@ package queues
 
 import stacks.Stack
 
-interface IQueue {
+private interface Queue {
     val size: Int
     fun peek(): Int
     fun enqueue(item: Int)
     fun dequeue()
 }
 
-class MyQueue2Stacks : IQueue {
+class MyQueue2Stacks : Queue {
     val stack1 = Stack<Int>()
     val stack2 = Stack<Int>()
 

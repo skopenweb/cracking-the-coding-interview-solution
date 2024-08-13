@@ -14,7 +14,9 @@ class ZeroMatrixTest {
         val expected = arrayOf(
             intArrayOf(1, 2, 3), intArrayOf(4, 5, 6), intArrayOf(7, 8, 9)
         )
+
         arrays_1_8_zero_matrix(matrix)
+
         matrix.forEachIndexed { index, array ->
             assertContentEquals(expected[index], matrix[index])
         }
@@ -28,7 +30,9 @@ class ZeroMatrixTest {
         val expected = arrayOf(
             intArrayOf(0, 0, 0), intArrayOf(4, 5, 0), intArrayOf(7, 8, 0)
         )
+
         arrays_1_8_zero_matrix(matrix)
+
         matrix.forEachIndexed { index, array ->
             assertContentEquals(expected[index], matrix[index])
         }
@@ -42,7 +46,9 @@ class ZeroMatrixTest {
         val expected = arrayOf(
             intArrayOf(0, 0, 0), intArrayOf(0, 0, 0), intArrayOf(0, 0, 0)
         )
+
         arrays_1_8_zero_matrix(matrix)
+
         matrix.forEachIndexed { index, array ->
             assertContentEquals(expected[index], matrix[index])
         }
@@ -56,7 +62,9 @@ class ZeroMatrixTest {
         val expected = arrayOf(
             intArrayOf(0, 0, 0), intArrayOf(0, 0, 0), intArrayOf(0, 0, 0)
         )
+
         arrays_1_8_zero_matrix(matrix)
+
         matrix.forEachIndexed { index, array ->
             assertContentEquals(expected[index], matrix[index])
         }

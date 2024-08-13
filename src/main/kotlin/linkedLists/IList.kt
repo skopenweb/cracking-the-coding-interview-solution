@@ -1,6 +1,6 @@
 package linkedLists
 
-interface IList {
+internal interface IList {
     val size: Int
     fun isEmpty(): Boolean
     fun add(n: Node): LinkedList
