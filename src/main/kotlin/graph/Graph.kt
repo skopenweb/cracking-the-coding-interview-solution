@@ -1,7 +1,8 @@
 package graph
 
 import queues.QueueImpl
-
+import tree.TreeNode
+import java.util.LinkedList
 
 /**
  * Adjacency list:
@@ -47,7 +48,66 @@ fun <T> graph_4_1_bfs_route(g: Graph<T>, start: T, end: T): Boolean {
     return false
 }
 
+fun graph_4_2_minimal_tree(n: Int): TreeNode<Int>? {
+    if (n == 0) return null
+
+    val arr = IntArray(n) { it + 1 }
+    val n = createTree(arr, 0, n - 1)
+    return n
+}
+
+internal fun createTree(arr: IntArray, low: Int, high: Int): TreeNode<Int>? {
+    if (low == high) return TreeNode(low)
+    if (low > high) return null
+
+    val s = high - low + 2
+    var k = 1
+    while (k <= s) {
+        k *= 2
+    }
+    k /= 2
+
+    val mid = low + (k - 1)
+    val l = createTree(arr, low, mid - 1)
+    val r = createTree(arr, mid + 1, high)
+
+    return TreeNode(arr[mid], l, r)
+}
+
+internal fun <T> graph_3_list_of_depths(node: TreeNode<T>): List<List<T>> {
+    val ll = LinkedList<List<T>>()
+
+    val q = QueueImpl<TreeNode<T>>()
+    q.enqueue(node)
+    var currCount = 1
+    var nextCount = 0
+
+    var l = LinkedList<T>()
+
+    while (q.isEmpty().not()) {
+        val d = q.dequeue()
+        l.add(d.data)
+        arrayOf(d.left, d.right).forEach {
+            it?.let {
+                nextCount++
+                q.enqueue(it)
+            }
+        }
+        currCount--
+        if (currCount == 0) {
+            ll.add(l)
+            l = LinkedList<T>()
+            currCount = nextCount
+            nextCount = 0
+        }
+    }
+    return ll
+}
+
 fun main() {
+}
+
+fun testRoute() {
     val nodes = Array(6) {
         GraphNode(it)
     }
@@ -66,4 +126,15 @@ fun main() {
     println(graph_4_1_bfs_route(g, 2, 0))
     println(graph_4_1_bfs_route(g, 4, 5))
     println(graph_4_1_bfs_route(g, 5, 4))
+}
+
+internal fun createFullTree(arr: IntArray, low: Int, high: Int): TreeNode<Int>? {
+    if (low == high) return TreeNode(low)
+    if (low > high) return null
+
+    val mid = (high - low + 1) / 2
+    val l = createFullTree(arr, low, mid - 1)
+    val r = createFullTree(arr, mid + 1, high)
+
+    return TreeNode(arr[mid], l, r)
 }
