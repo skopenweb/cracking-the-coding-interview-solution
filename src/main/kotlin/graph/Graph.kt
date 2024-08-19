@@ -74,6 +74,22 @@ internal fun createTree(arr: IntArray, low: Int, high: Int): TreeNode<Int>? {
     return TreeNode(arr[mid], l, r)
 }
 
+fun <T> graph_4_2_minimal_tree_2(array: Array<T>): TreeNode<T>? {
+    if (array.isEmpty()) return null
+
+    return makeMinimalTree(array, 0, array.size - 1)
+}
+
+fun <T> makeMinimalTree(arr: Array<T>, low: Int, high: Int): TreeNode<T>? {
+    if (low > high) return null
+    val mid = (low + high + 1) / 2
+
+    val left = makeMinimalTree(arr, low, mid - 1)
+    val right = makeMinimalTree(arr, mid + 1, high)
+
+    return TreeNode(data = arr[mid], left = left, right = right)
+}
+
 internal fun <T> graph_3_list_of_depths(node: TreeNode<T>): List<List<T>> {
     val ll = LinkedList<List<T>>()
 
@@ -137,4 +153,12 @@ internal fun createFullTree(arr: IntArray, low: Int, high: Int): TreeNode<Int>? 
     val r = createFullTree(arr, mid + 1, high)
 
     return TreeNode(arr[mid], l, r)
+}
+
+internal fun <T>height(root: TreeNode<T>?): Int {
+    if (root == null) return -1
+    val leftHeight = height(root.left)
+    val rightHeight = height(root.right)
+
+    return leftHeight.coerceAtLeast(rightHeight) + 1
 }

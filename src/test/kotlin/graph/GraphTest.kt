@@ -53,4 +53,27 @@ class GraphTest {
         assertEquals(l1, listOf("n1", "n2"))
         assertEquals(l2, listOf("n11", "n12", "n22"))
     }
+
+    @Test
+    fun `minimal height of tree`() {
+        val arr = Array(16) { ('A'.code + it).toChar() }
+        val expectedHeight = 4
+
+        val root = graph_4_2_minimal_tree_2(arr)
+        val height = height(root)
+
+        assertEquals(height, expectedHeight)
+    }
+
+    @Test
+    fun `minimal height of tree_2`() {
+        val arr = Array(32) { ('A'.code + it).toChar() }
+        val expectedHeight = 5
+
+        val root = graph_4_2_minimal_tree_2(arr)
+        val height = height(root)
+
+        assertEquals(height, expectedHeight)
+    }
+
 }
