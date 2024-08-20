@@ -43,7 +43,7 @@ class GraphTest {
 
         val n = TreeNode(data = "n", left = n1, right = n2)
 
-        val listOfNodesAtSameDepth = graph_3_list_of_depths(n)
+        val listOfNodesAtSameDepth = graph_4_3_list_of_depths(n)
 
         val l0 = listOfNodesAtSameDepth[0]
         val l1 = listOfNodesAtSameDepth[1]

@@ -2,7 +2,9 @@ package graph
 
 import queues.QueueImpl
 import tree.TreeNode
+import tree.TreeNodeWithParent
 import java.util.LinkedList
+import kotlin.math.abs
 
 /**
  * Adjacency list:
@@ -90,7 +92,7 @@ fun <T> makeMinimalTree(arr: Array<T>, low: Int, high: Int): TreeNode<T>? {
     return TreeNode(data = arr[mid], left = left, right = right)
 }
 
-internal fun <T> graph_3_list_of_depths(node: TreeNode<T>): List<List<T>> {
+internal fun <T> graph_4_3_list_of_depths(node: TreeNode<T>): List<List<T>> {
     val ll = LinkedList<List<T>>()
 
     val q = QueueImpl<TreeNode<T>>()
@@ -118,6 +120,75 @@ internal fun <T> graph_3_list_of_depths(node: TreeNode<T>): List<List<T>> {
         }
     }
     return ll
+}
+
+internal fun <T> graph_4_4_checkBalancedTree(node: TreeNode<T>?): Pair<Boolean, Int> {
+    if (node == null) return Pair(true, -1)
+
+    val left = graph_4_4_checkBalancedTree(node.left)
+    val right = graph_4_4_checkBalancedTree(node.right)
+
+    if (left.first || right.first) return Pair(false, -1)
+
+    val lh = left.second
+    val rh = right.second
+
+    val difference = abs(lh - rh)
+    return if (difference < 2) {
+        Pair(true, 1 + lh.coerceAtLeast(rh))
+    } else {
+        Pair(false, -1)
+    }
+}
+
+internal fun <T : Comparable<T>> graph_4_5_validateBST(root: TreeNode<T>): Boolean {
+    val rootResult = validateBinarySearchTree(root)
+    return rootResult.result
+}
+
+class NodeResult<T>(val result: Boolean, val min: T? = null, val max: T? = null)
+
+internal fun <T : Comparable<T>> validateBinarySearchTree(node: TreeNode<T>?): NodeResult<T> {
+    if (node == null) return NodeResult(true)
+
+    val leftResult = validateBinarySearchTree(node.left)
+    if (leftResult.result.not()) return NodeResult(false)
+
+    val rightResult = validateBinarySearchTree(node.right)
+    if (rightResult.result.not()) return NodeResult(false)
+
+    if (leftResult.max != null && leftResult.max > node.data) {
+        return NodeResult(false)
+    } else if (rightResult.min != null && rightResult.min < node.data) {
+        return NodeResult(false)
+    }
+    var min = node.data
+    var max = node.data
+    leftResult.min?.let {
+        min = it
+    }
+    rightResult.max?.let {
+        max = it
+    }
+    return NodeResult(true, min, max)
+}
+
+internal fun <T : Comparable<T>> graph_4_6_successor(node: TreeNodeWithParent<T>?): TreeNodeWithParent<T>? {
+    if (node?.parent == null) return null
+    node.right?.let {
+        var next: TreeNodeWithParent<T> = it
+        while (next.left != null) {
+            next = next.left!!
+        }
+        return next
+    }
+    var curr = node
+    var p = curr.parent
+    while (p != null && p.left == curr) {
+        curr = p
+        p = p.parent
+    }
+    return p
 }
 
 fun main() {
@@ -155,7 +226,7 @@ internal fun createFullTree(arr: IntArray, low: Int, high: Int): TreeNode<Int>? 
     return TreeNode(arr[mid], l, r)
 }
 
-internal fun <T>height(root: TreeNode<T>?): Int {
+internal fun <T> height(root: TreeNode<T>?): Int {
     if (root == null) return -1
     val leftHeight = height(root.left)
     val rightHeight = height(root.right)
