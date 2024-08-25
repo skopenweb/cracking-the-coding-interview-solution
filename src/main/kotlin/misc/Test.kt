@@ -1,3 +1,5 @@
+import java.util.Stack
+
 //package misc
 //
 ///**
@@ -142,66 +144,94 @@
 //}
 
 
-fun largestPalindrome(n: Int, k: Int): String {
-    val arr = if (k == 8 || k == 6 || k == 4 || k == 2) {
-        IntArray(n) { 8 }
-    } else if (k == 5) {
-        IntArray(n) { 5 }
-    } else {
-        IntArray(n) { 9 }
-    }
+//fun largestPalindrome(n: Int, k: Int): String {
+//    val arr = if (k == 8 || k == 6 || k == 4 || k == 2) {
+//        IntArray(n) { 8 }
+//    } else if (k == 5) {
+//        IntArray(n) { 5 }
+//    } else {
+//        IntArray(n) { 9 }
+//    }
+//
+//    for (i in 1..<n - 1) {
+//        arr[i] = 9
+//    }
+//
+//
+//    while (true) {
+//        if (pal(arr) && isDivis(arr, k)) {
+//            val sb = StringBuilder()
+//            arr.forEach { sb.append(it) }
+//            return sb.toString()
+//        } else {
+//            sub1(arr)
+//        }
+//    }
+//    return ""
+//}
+//
+//fun isDivis(a: IntArray, k: Int): Boolean {
+//    var num = 0L
+//    a.forEach { num = num * 10 + it }
+//
+//    return (num % k == 0L)
+//}
+//
+//fun pal(arr: IntArray): Boolean {
+//    var i = 0
+//    var j = arr.size - 1
+//    while (i < j) {
+//        if (arr[i] != arr[j]) return false
+//        i++
+//        j--
+//    }
+//    return true
+//}
+//
+//fun sub1(ar: IntArray) {
+//    var c = ar.size - 1
+//    var carry = 0
+//    while (c > 0) {
+//        ar[c] -= carry
+//        if (ar[c] == 0) {
+//            ar[c] = 9
+//            carry = -1
+//        } else {
+//            ar[c]--
+//            break
+//        }
+//        c--
+//    }
+//}
 
-    for (i in 1..<n - 1) {
-        arr[i] = 9
-    }
-
-
-    while (true) {
-        if (pal(arr) && isDivis(arr, k)) {
-            val sb = StringBuilder()
-            arr.forEach { sb.append(it) }
-            return sb.toString()
+fun evalRPN(tokens: Array<String>): Int {
+    val stack = Stack<String>()
+    val operandLists = listOf("+", "/", "*", "-")
+    tokens.forEach { item ->
+        val op = operandLists.find { it == item }
+        if (op == null) {
+            stack.add(item)
         } else {
-            sub1(arr)
+            val item0 = stack.pop()
+            val item1 = stack.pop()
+
+            val res = applyOp(item0, item1, op)
+            stack.push(res.toString())
         }
     }
-    return ""
+    return stack.pop().toInt()
 }
 
-fun isDivis(a: IntArray, k: Int): Boolean {
-    var num = 0L
-    a.forEach { num = num * 10 + it }
-
-    return (num % k == 0L)
-}
-
-fun pal(arr: IntArray): Boolean {
-    var i = 0
-    var j = arr.size - 1
-    while (i < j) {
-        if (arr[i] != arr[j]) return false
-        i++
-        j--
-    }
-    return true
-}
-
-fun sub1(ar: IntArray) {
-    var c = ar.size - 1
-    var carry = 0
-    while (c > 0) {
-        ar[c] -= carry
-        if (ar[c] == 0) {
-            ar[c] = 9
-            carry = -1
-        } else {
-            ar[c]--
-            break
-        }
-        c--
+fun applyOp(i1: String, i2: String, op: String): Int {
+    return when (op) {
+        "+" -> i1.toInt() + i2.toInt()
+        "-" -> i1.toInt() - i2.toInt()
+        "*" -> i1.toInt() * i2.toInt()
+        "/" -> i1.toInt() / i2.toInt()
+        else -> throw Exception()
     }
 }
 
 fun main() {
-    println(largestPalindrome(9, 5))
+    println(evalRPN(arrayOf("1", "2", "+")))
 }
