@@ -232,6 +232,127 @@ fun applyOp(i1: String, i2: String, op: String): Int {
     }
 }
 
+fun insertionSort(a: IntArray) {
+
+    for (i in a.indices) {
+        var j = i + 1
+        while (j > 0 && a[j] < a[j - 1]) {
+            swap(a, j, j - 1)
+            j--
+        }
+    }
+}
+
+fun countSum(a: IntArray, k: Int): Int {
+    var count = 0
+    for (i in a.indices) {
+        var sum = 0
+        for (j in i..<a.size) {
+            sum += a[i]
+            if (a[i] == k) {
+                count++
+                break
+            }
+        }
+    }
+    return count
+}
+
+
+fun countSum2(a: IntArray, k: Int): Int {
+    var count = 0
+    var l = 0
+    var r = 0
+    var maxlen = 0
+    var currSum = a[l]
+    while (l < a.size && r < a.size) {
+        if (currSum == k) {
+            count++
+            r++
+            l++
+            maxlen = maxlen.coerceAtLeast(r - l + 1)
+        }
+        if (currSum < k) {
+            currSum += a[++r]
+        } else if (currSum > k) {
+            currSum -= a[l++]
+        }
+    }
+    return count
+}
+
+fun longestSubArray(a: IntArray, sum: Int): Int {
+    var maxLen = 0
+    for (subArraySize in 1..a.size) {
+        var currSubArraySum = 0
+        for (i in 0..<subArraySize) currSubArraySum += a[i]
+        val iLast = a.size - subArraySize
+        for (j in 1..<iLast) {
+            currSubArraySum += a[subArraySize + j - 1] - a[j]
+            if (currSubArraySum < sum) {
+                maxLen = currSubArraySum
+                break
+            }
+        }
+    }
+    return maxLen
+}
+
+fun longestSubArray2(a: IntArray, sum: Int): Int {
+    var maxLen = 0
+
+    var currSubArraySize = a.size
+    var currSum = 0
+    for (i in 0..<a.size) {
+        currSum += a[i]
+    }
+    if (currSum <= sum) return currSubArraySize
+
+    while (--currSubArraySize > 0) {
+        currSum -= a[currSubArraySize]
+        if (currSum <= sum) return currSubArraySize
+        for (i in 1..a.size - currSubArraySize) {
+            currSum += a[currSubArraySize - 1 + i] - a[i - 1]
+            if (currSum <= sum) return currSubArraySize
+        }
+        currSubArraySize--
+    }
+    return maxLen
+}
+
+fun kadaneMaxSum(a: IntArray): Int {
+    var max = Int.MIN_VALUE
+    for (i in 0..a.size - 1) {
+        if (a[i] > max) max = a[i]
+    }
+    if (max < 0) return max
+    var currSum = 0
+    var currMax = 0
+
+    for (i in 0..<a.size) {
+        currSum += a[i]
+        if (currSum > currMax) currMax = currSum
+        if (currSum < 0) currSum = 0
+    }
+
+    return currMax
+}
+
+fun swap(a: IntArray, j: Int, i: Int) {
+    val t = a[i]
+    a[i] = a[j]
+    a[j] = t
+
+}
+
 fun main() {
+    // Iterate over an array
+    val a = IntArray(10) { i -> i + 1 }
+    for (i in 0..<a.size - 1) {
+        print(i)
+    }
+    println()
+
+    val arra = Array<IntArray>(5) { IntArray(5) }
     println(evalRPN(arrayOf("1", "2", "+")))
 }
