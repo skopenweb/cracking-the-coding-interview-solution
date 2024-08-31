@@ -4,7 +4,7 @@ import kotlin.random.Random
 
 class Solution1 {
     fun findMinDifference(timePoints: List<String>): Int {
-        val arr = Array<Int>(timePoints.size) { 0 }
+        val arr = Array(timePoints.size) { 0 }
 
         timePoints.forEachIndexed { index, item ->
             arr[index] = item.toMinutes()
@@ -18,7 +18,6 @@ class Solution1 {
                 min = diff
             }
         }
-
         return min
     }
 
@@ -69,7 +68,6 @@ class Solution1 {
     }
 }
 
-
 class Solution(w: IntArray) {
     val ww = w
     var sum = IntArray(w.size) {w[it]}
@@ -110,5 +108,6 @@ class Solution(w: IntArray) {
  */
 fun main() {
     val ans = Solution1().findMinDifference(listOf("00:59", "23:59", "00:50"))
+    println(-5%4)
     println(ans)
 }

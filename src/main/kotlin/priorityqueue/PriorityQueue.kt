@@ -48,10 +48,12 @@ class BinaryHeap<T : Comparable<T>> : PriorityQueue<T> {
     private fun right(index: Int) = 2 * index + 2
     private fun heapifyUp(i: Int) {
         var curr = i
-        var p = parent(i)
-        while (curr > 0 && (items[p] as T) > (items[curr] as T)) {
-            swap(items, i, p)
-            curr = p
+        while (curr > 0) {
+            val p = parent(i)
+            if (items[p] as T > items[curr] as T) {
+                swap(items, i, p)
+                curr = p
+            } else break
         }
     }
 
@@ -59,8 +61,8 @@ class BinaryHeap<T : Comparable<T>> : PriorityQueue<T> {
         var shallHeapify = true
         var curr = i
         do {
-            var l = left(i)
-            var r = right(i)
+            val l = left(i)
+            val r = right(i)
 
             var min = curr
             if (l < currSize && (items[l] as T) < (items[curr] as T)) {
@@ -86,5 +88,8 @@ class BinaryHeap<T : Comparable<T>> : PriorityQueue<T> {
 }
 
 fun main() {
-    println("Hello ${-1 / 2}")
+    val testArray = IntArray(5)
+    testArray.forEach { print("$it") }
+
+    println("Hello ${-112 / 3}")
 }
