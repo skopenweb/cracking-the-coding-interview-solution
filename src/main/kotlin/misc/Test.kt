@@ -329,12 +329,13 @@ fun kadaneMaxSum(a: IntArray): Int {
     var currSum = 0
     var currMax = 0
 
-    for (i in 0..<a.size) {
-        currSum += a[i]
+    for (element in a) {
+        currSum += element
         if (currSum > currMax) currMax = currSum
         if (currSum < 0) currSum = 0
     }
-
+    val l = listOf("")
+    l.size
     return currMax
 }
 
@@ -345,14 +346,35 @@ fun swap(a: IntArray, j: Int, i: Int) {
 
 }
 
+fun findMaximumScore(nums: List<Int>): Long {
+    var ans = 0L
+    var i = 0
+    var j = 0
+    while(j < nums.size) {
+        if (nums[i] < nums[j]) {
+            ans += nums[i] * (j - i)
+            i = j
+        } else {
+            j++
+        }
+    }
+    ans += (j - i) *  nums[i]
+    return ans
+}
+
 fun main() {
     // Iterate over an array
-    val a = IntArray(10) { i -> i + 1 }
-    for (i in 0..<a.size - 1) {
-        print(i)
-    }
-    println()
+//    val a = IntArray(10) { i -> i + 1 }
+//    for (i in 0..<a.size - 1) {
+//        print(i)
+//    }
+//    println()
+//
+//    println(1 in 0..<2)
+//
+//    val arra = Array<IntArray>(5) { IntArray(5) }
+//    println(evalRPN(arrayOf("1", "2", "+")))
 
-    val arra = Array<IntArray>(5) { IntArray(5) }
-    println(evalRPN(arrayOf("1", "2", "+")))
+    val a = findMaximumScore(listOf(1, 3, 1, 5))
+    println("a = $a")
 }
