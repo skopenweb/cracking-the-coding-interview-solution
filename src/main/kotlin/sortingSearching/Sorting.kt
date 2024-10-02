@@ -1,8 +1,10 @@
 package sortingSearching
 
+import prettyPrint
+
 class Node<T>(val data: T, var next: Node<T>? = null)
 
-fun <T : Comparable<T>> quicksort(a: Array<T>) {
+fun <T : Comparable<T>> myQuicksort(a: Array<T>) {
     quicksort(a, 0, a.size - 1)
 }
 
@@ -29,6 +31,8 @@ fun <T : Comparable<T>> partition(a: Array<T>, l: Int, r: Int): Int {
         i++
     }
     a.swap(firstHigh, r)
+    a.prettyPrint()
+    println()
     return firstHigh
 }
 
