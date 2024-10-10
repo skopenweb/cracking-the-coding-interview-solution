@@ -1,5 +1,6 @@
 package sortingSearching
 
+import misc.P3302LexiSequence
 import prettyPrint
 
 fun bruteForcePatternMatch(text: String, pattern: String): List<Int> {
@@ -33,7 +34,7 @@ fun KMPSearch(s: String, p: String): List<Int> {
         if (j == p.length) {
             matches.add(i - p.length)
             j = lps[j - 1]
-        } else if (i < s.length && s[i] != s[j]) {
+        } else if (i < s.length && s[i] != p[j]) {
             if (j > 0) {
                 j = lps[j - 1]
             } else {
@@ -63,14 +64,17 @@ fun lps(s: String): IntArray {
 }
 
 fun main() {
-    val text = "AABAACAADAABAABA"
-    val pattern = "AABA"
+    val text = "baaaabaaa"
+    val pattern = "aaa"
 
-//    val ans = bruteForcePatternMatch(text, pattern)
-//    //ans.prettyPrint()
-//
+    val ans = bruteForcePatternMatch(text, pattern)
+    ans.prettyPrint()
+
     val ans2 = KMPSearch(text, pattern)
     ans2.prettyPrint()
+
+    val ans3 = P3302LexiSequence().KmpSearch(text, pattern)
+    ans3.prettyPrint()
 
 //    val s = "aaaabab"
 //    //lsp(s).prettyPrint()
