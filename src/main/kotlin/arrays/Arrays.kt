@@ -1,15 +1,5 @@
 import kotlin.math.abs
 
-fun main(args: Array<String>) {
-    println("Cracking the coding interview")
-    println("Chapter 1: Arrays and Strings")
-    arrays_1_1_isUnique("abc")
-
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
-}
-
 internal fun arrays_1_1_isUnique(s: String): Boolean {
     val end = s.length - 1
     var start = 0
@@ -213,7 +203,25 @@ internal fun arrays_1_8_zero_matrix(matrix: Array<IntArray>) {
     }
 }
 
-fun arrays_1_9_string_rotation() {
-    
+fun arrays_1_9_string_rotation(s1: String, s2: String): Boolean {
+    // TODO check here
+    val sb = StringBuilder()
+    sb.append(s1)
+    sb.append(s2)
+
+    return sb.toString().indexOf(s1) != -1
 }
 
+fun main() {
+    println("Cracking the coding interview")
+    println("Chapter 1: Arrays and Strings")
+    val result = arrays_1_9_string_rotation("abc", "bcdal")
+    println("search algorithm: $result")
+
+//    arrays_1_1_isUnique("abc")
+//
+//    // Try adding program arguments via Run/Debug configuration.
+//    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
+//    println("Program arguments: ${args.joinToString()}")
+
+}
