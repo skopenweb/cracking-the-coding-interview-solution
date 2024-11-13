@@ -1,6 +1,5 @@
 package sortingSearching
 
-import misc.P3302LexiSequence
 import prettyPrint
 
 fun bruteForcePatternMatch(text: String, pattern: String): List<Int> {
@@ -72,9 +71,6 @@ fun main() {
 
     val ans2 = KMPSearch(text, pattern)
     ans2.prettyPrint()
-
-    val ans3 = P3302LexiSequence().KmpSearch(text, pattern)
-    ans3.prettyPrint()
 
 //    val s = "aaaabab"
 //    //lsp(s).prettyPrint()
